@@ -6,28 +6,34 @@ import pandas as pd
 from os import walk
 from IPython.display import display, clear_output
 
-
 class experiments:
-    def __init__(self,path,exptype):
-        self.path=path
-        self.data=[]
-        self.foldername=[]
-        self.pathname=[]
-        self.filesname=[]
-        self.count = 0
-        self.ptable=[]
+    def __init__(self, lab, sys, exptype, exp):
+        self.path='/media/labfiles/lab-experiments'
         self.headers=['No. Dir','Name Dir', 'No. files']
+        self.count=0
+        self.foldername=[]
+        self.filesname=[]
+        self.pathname=[]
+        self.ptable=[]
         self.datac=[]
-        #self.namef=[]
+        self.data=[]
         if exptype==None:
             self.exptype = 'ras'
         else:
             self.exptype=exptype
+
+        self.path=self.path+'/spectroscopy-lab' if lab==1 else self.path+'/ellipsometry-lab'
+        if lab==2:
+            self.path=self.path+'/nano' if sys=='nano' else self.path+'/cryogenic-system-2' if sys=='cry2' else self.path+'/cryogenic-system-1' if sys=='cry1' else self.path
+        #self.path.append()
+    
         
         for (dirpath, dirnames, filenames) in walk(self.path):
-            self.foldername.append(dirpath)
-        
+            if exp in dirpath:
+                self.foldername.append(dirpath)
+
         self.foldername = sorted(self.foldername)
+        #print(self.foldername)
         for dirpath in self.foldername:
             clear_output(wait=True)
             if self.exptype in dirpath:
@@ -35,16 +41,15 @@ class experiments:
                 self.namef=[]
                 for name in sorted(glob.glob(dirpath+'/*.xls')):
                     if exptype in name:
-                        #print(name.split('/media/labfiles/ruco/experiments')[1]) 
                         dat=pd.read_excel(name).values
                         self.datac.append(dat[::-1])
                         self.namef.append(name)
                 self.data.append(self.datac)
                 self.filesname.append(self.namef)
                 self.pathname.append(dirpath)
-                self.ptable.append([self.count,dirpath.split('/media/labfiles/lab-experiments/spectroscopy-lab/cryogenic-system-1/')[1],len(self.datac)])
-                print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
+                self.ptable.append([self.count,dirpath.split(self.path+'/')[1],len(self.datac)])
                 self.count+=1
+        
         print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
         
 
