@@ -3,12 +3,13 @@ import glob
 from tabulate import tabulate
 from datetime import date
 import pandas as pd
+import h5py as h5
 from os import walk
 from IPython.display import display, clear_output
 
 class experiments:
     def __init__(self, lab, sys, exptype, exp):
-        self.path='/media/labfiles/lab-experiments'
+        self.path='/media/labfiles/lab-exps'
         self.headers=['No. Dir','Name Dir', 'No. files']
         self.count=0
         self.foldername=[]
@@ -22,9 +23,9 @@ class experiments:
         else:
             self.exptype=exptype
 
-        self.path=self.path+'/spectroscopy-lab' if lab==1 else self.path+'/ellipsometry-lab'
+        self.path=self.path+'/spectro-lab' if lab==1 else self.path+'/ellipsometry-lab'
         if lab==2:
-            self.path=self.path+'/nano' if sys=='nano' else self.path+'/cryogenic-system-2' if sys=='cry2' else self.path+'/cryogenic-system-1' if sys=='cry1' else self.path
+            self.path=self.path+'/nano' if sys=='nano' else self.path+'/cry-sys-2' if sys=='cry2' else self.path+'/cry-sys-1' if sys=='cry1' else self.path
         #self.path.append()
     
         
@@ -44,6 +45,12 @@ class experiments:
                         dat=pd.read_excel(name).values
                         self.datac.append(dat[::-1])
                         self.namef.append(name)
+                for name in sorted(glob.glob(dirpath+'/*.h5')):
+                    if exptype in name:
+                        dat=h5.File(name,'r')
+                        dset=list(dat.keys())
+                        self.datac.append(dat[dset[0]][:,:])
+                        self.namef.append(name)
                 self.data.append(self.datac)
                 self.filesname.append(self.namef)
                 self.pathname.append(dirpath)
@@ -51,5 +58,3 @@ class experiments:
                 self.count+=1
         
         print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
-        
-
