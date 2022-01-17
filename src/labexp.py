@@ -1,3 +1,4 @@
+__author__ = 'O. Ruiz-Cigarrillo'
 import os
 import glob
 from tabulate import tabulate
