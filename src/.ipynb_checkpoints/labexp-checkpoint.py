@@ -61,11 +61,6 @@ class experiments:
         print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
 
 
-    def highdim(self):
-        self.totaldata = len(self.data)
-        self.listdim # this list holds of high dimension corresponds to each examperiment
-        for i in range(self.totaldata):
-            for j in self.data[i]:
-                checkdim = 
+ 
 
 
