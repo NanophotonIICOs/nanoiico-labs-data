@@ -12,10 +12,12 @@ The principal objective of this repository is to share and develop code to analy
     * Near-field Scanning Optical Microscope (**NSOM**)
     
 
+
 Contributors:
 * [Karla Alferez](https://github.com/KarlaAlf)
 * [Maria Rangel](https://github.com/Mariarangel6)
 * [Paola Yurem Pérez](https://github.com/PaolaYurem)
 * [Alberto Segura](https://github.com/AlbertoSegura24)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
-* [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)(https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=for-the-badge)
+* [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
+    ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=for-the-badge)
