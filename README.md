@@ -20,4 +20,10 @@ Contributors:
 * [Alberto Segura](https://github.com/AlbertoSegura24)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
+<<<<<<< HEAD
     ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=flat)
+=======
+
+
+![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=for-the-badge)
+>>>>>>> up
