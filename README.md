@@ -4,24 +4,16 @@ This repository contains code and notebooks to analyze experimental data, develo
 The principal objective of this repository is to share and develop code to analyze experiments of Semiconductor spectroscopy as : 
 
 + Macro and Micro Spectroscopy
-<<<<<<< HEAD
-    * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic ($`\approx`$ 30 K)
-    * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic ($`\approx`$ 30 K)
+    * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic ($\approx$ 30 K)
+    * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic ($\approx$ 30 K)
 =======
     * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic ($\approx$ 30 K)
     * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic ($\approx$ 30 K)
->>>>>>> main
 + Nano Spectroscopy
 
     * Nano Reflectance Anisotropy Spectroscopy 
     * Near-field Scanning Optical Microscope (**NSOM**)
-    
 
-<<<<<<< HEAD
-<!---
-
-=======
->>>>>>> main
 Contributors:
 * [Karla Alferez](https://github.com/KarlaAlf)
 * [Maria Rangel](https://github.com/Mariarangel6)
@@ -30,7 +22,3 @@ Contributors:
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
     ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=for-the-badge)
-<<<<<<< HEAD
--->
-=======
->>>>>>> main
