@@ -8,7 +8,6 @@ The principal objective of this repository is to share and develop code to analy
     * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic (`≈` 30 K)
     * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic (`≈` 30 K)
     * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic (`≈` 30 K)
-    
 + Nano Spectroscopy
 
     * Nano Reflectance Anisotropy Spectroscopy 
@@ -21,4 +20,4 @@ Contributors:
 * [Alberto Segura](https://github.com/AlbertoSegura24)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
-    ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=for-the-badge)
+    ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=flat)
