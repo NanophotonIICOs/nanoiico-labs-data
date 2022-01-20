@@ -4,25 +4,11 @@ This repository contains code and notebooks to analyze experimental data, develo
 The principal objective of this repository is to share and develop code to analyze experiments of Semiconductor spectroscopy as : 
 
 + Macro and Micro Spectroscopy
-<<<<<<< HEAD
-<<<<<<< HEAD
-    * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic ($`\approx`$ 30 K)
-    * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic ($\approx$ 30 K)
-    * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic ($\approx$ 30 K)
-    * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic ($\approx$ 30 K)
-=======
-=======
->>>>>>> 31e5ed81771c5b72c482a1e909f12d6b85e3386f
     * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic (`≈` 30 K)
     * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic (`≈` 30 K)
     * Macro and Mico Reflectance Anisotropy Spectroscopy (**RAS**) both ath room  and cryogenic (`≈` 30 K)
     * Photo and Differentiate Photoreflectance Spectroscopy (**PR**, **PRD**) both ath room  and cryogenic (`≈` 30 K)
-<<<<<<< HEAD
->>>>>>> Update README
-=======
->>>>>>> 31e5ed81771c5b72c482a1e909f12d6b85e3386f
 + Nano Spectroscopy
-
     * Nano Reflectance Anisotropy Spectroscopy 
     * Near-field Scanning Optical Microscope (**NSOM**)
 
