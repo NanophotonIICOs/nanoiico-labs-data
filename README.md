@@ -20,4 +20,4 @@ Contributors:
    [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/Alberto_Segura5.svg?style=social&label=Follow%20%40Alberto_Segura)](https://twitter.com/Alberto_Segura5)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
-    ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=flat)
+    [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/ruco0713.svg?style=social&label=Follow%20%40ruco0713)](https://twitter.com/ruco0713)
