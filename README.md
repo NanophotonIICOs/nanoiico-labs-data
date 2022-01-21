@@ -17,7 +17,7 @@ Contributors:
 * [Maria Rangel](https://github.com/Mariarangel6)
 * [Paola Yurem Pérez](https://github.com/PaolaYurem)
 * [Alberto Segura](https://github.com/AlbertoSegura24)
-   ![Twitter Follow](https://img.shields.io/twitter/follow/Alberto_Segura5?color=blue&logo=twitter&style=flat)
+   [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/Alberto_Segura5.svg?style=social&label=Follow%20%40bukotsunikki)](https://twitter.com/Alberto_Segura5)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
     ![Twitter Follow](https://img.shields.io/twitter/follow/ruco0713?color=blue&logo=twitter&style=flat)
