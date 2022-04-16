@@ -62,13 +62,5 @@ class experiments:
             print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
         else:
             print("no experiments found, change search parameters")
-
-    # Sorry this function doesn't work
-    # def highdim(self):
-    #     self.totaldata = len(self.data)
-    #     self.listdim # this list holds of high dimension corresponds to each examperiment
-    #     for i in range(self.totaldata):
-    #         for j in self.data[i]:
-    #             checkdim = 
-
-
+    
+    def plots(self):

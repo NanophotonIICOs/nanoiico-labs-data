@@ -14,10 +14,6 @@ The principal objective of this repository is to share and develop code to analy
 
 Contributors:
 * [Karla Alferez](https://github.com/KarlaAlf)
-* [Maria Rangel](https://github.com/Mariarangel6)
-* [Paola Yurem Pérez](https://github.com/PaolaYurem)
-* [Alberto Segura](https://github.com/AlbertoSegura24)
-   [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/AlbertoSegurad5.svg?style=social&label=Follow%20%40AlbertoSegurad5)](https://twitter.com/AlbertoSegurad5)
 * [Gabriel Martnez<sup>*</sup>](https://github.com/Gabmtzz)
 * [Oscar Ruiz<sup>*</sup>](https://github.com/RUCO13)<br/>
     [![Twitter URL](https://img.shields.io/twitter/url/https/twitter.com/ruco0713.svg?style=social&label=Follow%20%40ruco0713)](https://twitter.com/ruco0713)
