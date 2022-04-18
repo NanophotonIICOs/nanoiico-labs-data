@@ -62,5 +62,6 @@ class experiments:
             print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
         else:
             print("no experiments found, change search parameters")
-    
-    def plots(self):
+
+
+
