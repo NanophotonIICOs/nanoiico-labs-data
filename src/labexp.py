@@ -62,6 +62,24 @@ class experiments:
             print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
         else:
             print("no experiments found, change search parameters")
+  
+class parameters():
+    def __init__(self,**kwargs):
+        # setting any extra parameters provided with initialisation
+        for key,value in kwargs.items():
+            setattr(self,key,value)
+
+class AttrDict(dict):
+    """turns a dictionary into an object with attribute style lookups"""
+    def __init__(self, *args, **kwargs):
+        super(AttrDict, self).__init__(*args, **kwargs)
+        self.__dict__ = self
 
 
 
+class plots(parameters):
+    def __init__(self,inputfile):
+        if type(inputfile)==dict:
+            inputfile=AttrDict(inputfile) 
+        for i in inputfile:
+            print(i)
