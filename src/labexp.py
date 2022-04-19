@@ -63,23 +63,18 @@ class experiments:
         else:
             print("no experiments found, change search parameters")
   
-class parameters():
-    def __init__(self,**kwargs):
-        # setting any extra parameters provided with initialisation
-        for key,value in kwargs.items():
-            setattr(self,key,value)
-
-class AttrDict(dict):
-    """turns a dictionary into an object with attribute style lookups"""
-    def __init__(self, *args, **kwargs):
-        super(AttrDict, self).__init__(*args, **kwargs)
-        self.__dict__ = self
 
 
 
-class plots(parameters):
-    def __init__(self,inputfile):
-        if type(inputfile)==dict:
-            inputfile=AttrDict(inputfile) 
-        for i in inputfile:
-            print(i)
+
+
+# def CorrImag(datIm,grade,offset):
+#     ImRes=np.zeros(datIm.shape)
+#     for i in range(ImRes.shape[0]):
+#         datnum=np.array(datIm[i,:])
+    
+#         x=np.arange(0,datnum.size)
+#         a,b =np.polyfit(x,datnum,grade)
+#         fit=a*x+b
+#         ImRes[i,:]=fit-datnum+offset
+#     return ImRes
