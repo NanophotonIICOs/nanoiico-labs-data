@@ -57,6 +57,13 @@ class figs(parameters):
         #     self.expf = len(self.data)
         fig,ax = plt.subplots(nrows=1,ncols=2,figsize=(10,6))
         plt.subplots_adjust(wspace=0.25)
+        ravx = 0
+        ravy = 0
+        count= 0
+        rav = np.zeros((self.data[0][0].shape[0],2))
+        rasav = np.zeros((self.data[0][0].shape[0],2))
+        rasavx=0
+        rasavy=0
         for i in range(self.expi,self.expf):
             for j in range(len(self.data[i])):
                 lbl=join_labels(self.filesname[i][j]) if i>0 else join_labels(self.filesname[i][j])
@@ -67,7 +74,7 @@ class figs(parameters):
                 r1  = (r0-bgr)
                 
                 axins1 = inset_axes(ax[1], width="100%", height="100%",
-                            bbox_to_anchor=(0.0,0.7,0.5,0.3),
+                            bbox_to_anchor=(0.0,0.7,0.3,0.3),
                             bbox_transform=ax[1].transAxes,
                             borderpad=0,
                                 )
@@ -76,16 +83,28 @@ class figs(parameters):
                 axins1.set_yticks([])
                 axins1.plot(self.data[i][j][:,0],r0)
                 axins1.plot(self.data[i][j][:,0],bgr,'r')
-                #axins1.set_xlim([1.47,1.53])
-                #axins1.set_ylim([-3e-3,0.3e-3])
-                ax[1].plot(self.data[i][j][:,0],r1)
+                ax[1].plot(self.data[i][j][:,0],r1,alpha=0.1)
 
+                #averages
+                ravy+=r1
+                ravx+=self.data[i][j][:,0]
+                rasavx+=self.data[i][j][:,0]
+                rasavy+=self.data[i][j][:,1]
+                count+=1
+        rav[:,0]=ravx/count
+        rav[:,1]=ravy/count
+        rasav[:,0]=rasavx/count
+        rasav[:,1]=rasavy/count
+
+        ax[0].plot(rasav[:,0],rasav[:,1],label="Total Average RAS")
+        ax[1].plot(rav[:,0],rav[:,1],'b')
+        
         ax[0].set_xlabel("Photon energy (eV)")    
         ax[0].set_ylabel("RAS")    
         ax[1].set_xlabel("Photon energy (eV)")    
         ax[1].set_ylabel("R")    
         ax[0].legend(frameon=False,fontsize=10)        
-        plt.show()        
+        plt.show() 
 
 
 
