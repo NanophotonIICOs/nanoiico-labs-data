@@ -20,6 +20,11 @@ class experiments:
         self.ptable=[]
         self.datac=[]
         self.data=[]
+        self.raspos1=[]
+        self.raspos2=[]
+        self.nameraspos1=[]
+        self.nameraspos2=[]
+        self.nameraspos=[]
         self.exptype=exptype
 
         self.path=self.path+'/spectro-lab' if lab==1 else self.path+'/ellipsometry-lab'
@@ -36,11 +41,21 @@ class experiments:
             if self.exptype in dirpath:
                 self.datac=[]
                 self.namef=[]
+                self.npos1=[]
+                self.npos2=[]
                 for name in sorted(glob.glob(dirpath+'/*.xls')):
                     if exptype in name:
                         dat=pd.read_excel(name).values
                         self.datac.append(dat[::-1])
                         self.namef.append(name)
+                        if 'pos1' in name:
+                            self.raspos1.append(dat[::-1])
+                            self.nameraspos1.append(name)
+                            self.npos1.append(name)
+                        elif 'pos2' in name:
+                            self.raspos2.append(dat[::-1])
+                            self.nameraspos2.append(name)
+                            self.npos2.append(name)
                 for name in sorted(glob.glob(dirpath+'/*.h5')):
                     if exptype in name:
                         dat=h5.File(name,'r')
@@ -55,6 +70,12 @@ class experiments:
                 self.data.append(self.datac)
                 self.filesname.append(self.namef)
                 self.pathname.append(dirpath)
+
+                if self.npos1:
+                    self.nameraspos.append(self.npos1)
+                elif self.npos2:
+                    self.nameraspos.append(self.npos2)
+
                 self.ptable.append([self.count,dirpath.split(self.path+'/')[1],len(self.datac)])
                 self.count+=1
         
@@ -64,17 +85,18 @@ class experiments:
             print("no experiments found, change search parameters")
   
 
+        maxrows=0
+        maxcols=0
+        for i in range(len(self.data)):
+            for j in range(len(self.data[i])):
+                nrows=self.data[i][j].shape[0]
+                ncols=self.data[i][j].shape[1]
+                if nrows>maxrows:
+                    maxrows=nrows
+                if ncols>maxcols:
+                    maxcols=ncols
 
-
-
-
-# def CorrImag(datIm,grade,offset):
-#     ImRes=np.zeros(datIm.shape)
-#     for i in range(ImRes.shape[0]):
-#         datnum=np.array(datIm[i,:])
-    
-#         x=np.arange(0,datnum.size)
-#         a,b =np.polyfit(x,datnum,grade)
-#         fit=a*x+b
-#         ImRes[i,:]=fit-datnum+offset
-#     return ImRes
+        #create total array
+        # self.tarray=np.zeros((maxrows,maxcols,len(self.data)))
+        # for i in range(len(self.data)):
+        #     for j in range
