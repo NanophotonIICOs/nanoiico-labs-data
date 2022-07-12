@@ -26,6 +26,8 @@ class experiments:
         self.nameraspos2=[]
         self.nameraspos=[]
         self.exptype=exptype
+        self.rasp1table=[]
+        self.rasp2table=[]
 
         self.path=self.path+'/spectro-lab' if lab==1 else self.path+'/ellipsometry-lab'
         if lab==2:
@@ -44,18 +46,21 @@ class experiments:
                 self.npos1=[]
                 self.npos2=[]
                 for name in sorted(glob.glob(dirpath+'/*.xls')):
-                    if exptype in name:
+                    singlename=name.split('/')[-1]
+                    if exptype in singlename or "RD" in singlename or "rds" in singlename:
                         dat=pd.read_excel(name).values
                         self.datac.append(dat[::-1])
                         self.namef.append(name)
-                        if 'pos1' in name:
+                        if 'pos1' in name or 'Pos1' in name or 'p1' in name:
                             self.raspos1.append(dat[::-1])
                             self.nameraspos1.append(name)
                             self.npos1.append(name)
-                        elif 'pos2' in name:
+                        elif 'pos2' in name or 'Pos2' in name or 'p2' in name:
                             self.raspos2.append(dat[::-1])
                             self.nameraspos2.append(name)
                             self.npos2.append(name)
+                    else:
+                        pass
                 for name in sorted(glob.glob(dirpath+'/*.h5')):
                     if exptype in name:
                         dat=h5.File(name,'r')
@@ -67,6 +72,8 @@ class experiments:
                         dat=np.loadtxt(name)
                         self.datac.append(dat[:,:])
                         self.namef.append(name)
+
+
                 self.data.append(self.datac)
                 self.filesname.append(self.namef)
                 self.pathname.append(dirpath)
@@ -78,25 +85,32 @@ class experiments:
 
                 self.ptable.append([self.count,dirpath.split(self.path+'/')[1],len(self.datac)])
                 self.count+=1
-        
+                
         if self.datac:
             print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
         else:
             print("no experiments found, change search parameters")
   
+    def darray(self):
+        alldata=self.data
+        
+        # maxrowspos1 = max(i.shape[0] for i in self.raspos1)
+        # maxcolspos1 = max(i.shape[1] for i in self.raspos1)
+        # maxrowspos2 = max(i.shape[0] for i in self.raspos2)
+        # maxcolspos2 = max(i.shape[1] for i in self.raspos2)
 
-        maxrows=0
-        maxcols=0
-        for i in range(len(self.data)):
-            for j in range(len(self.data[i])):
-                nrows=self.data[i][j].shape[0]
-                ncols=self.data[i][j].shape[1]
-                if nrows>maxrows:
-                    maxrows=nrows
-                if ncols>maxcols:
-                    maxcols=ncols
+      
 
-        #create total array
-        # self.tarray=np.zeros((maxrows,maxcols,len(self.data)))
-        # for i in range(len(self.data)):
-        #     for j in range
+        # #create total array
+        # self.araspos1=np.zeros((maxrowspos1,maxcolspos1,len(self.raspos1)))
+        # for k in range(len(self.raspos1)):
+        #     for i in range(self.raspos1[k].shape[1]):
+        #         for j in range(self.raspos1[k].shape[0]):
+        #             self.araspos1[j,i,k]=self.raspos1[k][j][i]
+
+        # self.araspos2=np.zeros((maxrowspos2,maxcolspos2,len(self.raspos2)))
+        # for k in range(len(self.raspos2)):
+        #     for i in range(self.raspos2[k].shape[1]):
+        #         for j in range(self.raspos2[k].shape[0]):
+        #             self.araspos2[j,i,k]=self.raspos2[k][j][i]
+

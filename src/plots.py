@@ -10,26 +10,23 @@ from scipy.signal import savgol_filter
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import matplotlib.ticker
 
-
-
 def join_labels(string,extra=r""):
     str_day=string.split('/')[-2].split('-')[0:4]
     str_exp=string.split('/')[-1].split('.')[0]
     exp_label='-'.join(str_day)+' -'+str_exp+' '+extra
     return exp_label  
 
-
 def rbackline(data,nopts,polgrade):
-        datax=data[:,0]
-        datay=data[:,1]
-        backline=savgol_filter(datay,nopts,polgrade)
-        datayrl = datay-backline
-        dataout = np.array([datax,datayrl]).T
-        class Results(): pass
-        results          = Results()
-        results.dataout  = dataout
-        results.backline = backline
-        return results
+    datax=data[:,0]
+    datay=data[:,1]
+    backline=savgol_filter(datay,nopts,polgrade)
+    datayrl = datay-backline
+    dataout = np.array([datax,datayrl]).T
+    class Results(): pass
+    results          = Results()
+    results.dataout  = dataout
+    results.backline = backline
+    return results
 
 def rbdata(data):
     ldata = data.shape[0]
@@ -76,9 +73,9 @@ class adata(parameters):
         self.data=sample.data
         self.raspos1=sample.raspos1
         self.raspos2=sample.raspos2
-        self.nameraspos1=sample.nameraspos1
-        self.nameraspos2=sample.nameraspos2
-        self.nameraspos=sample.nameraspos
+        # self.nameraspos1=sample.nameraspos1
+        # self.nameraspos2=sample.nameraspos2
+        # self.nameraspos=sample.nameraspos
         self.samplename=inputfile.samplename
         self.expi=inputfile.expi
         self.expf=inputfile.expf
@@ -91,6 +88,10 @@ class adata(parameters):
         self.rdata=[]
         self.nopts=inputfile.nopts
         self.polgrade=inputfile.polgrade
+        # self.raspos1expi=inputfile.raspos1expi
+        # self.raspos1expf=inputfile.raspos1expf
+        # self.raspos2expi=inputfile.raspos2expi
+        # self.raspos2expf=inputfile.raspos2expf
 
 
     def plotall(self):
@@ -119,7 +120,7 @@ class adata(parameters):
                 axins1.set_xticks([])
                 axins1.set_yticks([])
                 axins1.plot(self.data[i][j][:,0],r0)
-                axins1.plot(self.data[i][j][:,0],bgr,'r')
+
                 ax[1].plot(self.data[i][j][:,0],r1,lw=1,alpha=1)
                 count+=1
 
@@ -131,13 +132,11 @@ class adata(parameters):
         for axe in ax:
             axe.yaxis.set_major_formatter(OOMFormatter(-4, "%1.1f"))
             axe.ticklabel_format(axis='y', style='sci', scilimits=(-4,-4))
-
-        ax[0].legend(frameon=False,fontsize=10)
         plt.show() 
 
 
     def plotras(self):
-        fig,ax = plt.subplots(nrows=1,ncols=2,figsize=(10,5))
+        fig,ax = plt.subplots(nrows=1,ncols=2,figsize=(13,7))
         plt.subplots_adjust(wspace=0.2)
 
         axins1 = inset_axes(ax[1], width="100%", height="100%",
@@ -167,7 +166,7 @@ class adata(parameters):
         self.rasdatap2=[]
         self.rdatap2=[]
 
-        for i in range(self.truncdata,len(self.raspos1)):
+        for i in range(self.raspos1expi,self.raspos1expf):
             maxvals=np.max(self.raspos1[i][:,1])
             if maxvals>=1e-1 or maxvals<=-1e-1:
                 pass
@@ -181,7 +180,7 @@ class adata(parameters):
                 #
                 axins1.plot(self.raspos1[i][:,0],r0)
                 axins1.plot(self.raspos1[i][:,0],bgr)
-                ax[1].plot(self.raspos1[i][:,0],r1,lw=1,alpha=0.2)
+                ax[1].plot(self.raspos1[i][:,0],r1,lw=1,alpha=0.1)
                 #averages
                 ravyp1+=r1
                 ravxp1+=self.raspos1[i][:,0]
@@ -191,7 +190,7 @@ class adata(parameters):
                 self.rdatap1.append(np.array([self.raspos1[i][:,0],self.raspos1[i][:,2]]).T)
                 countp1+=1
 
-        for i in range(self.truncdata,len(self.raspos2)):
+        for i in range(self.raspos2expi,self.raspos2expf):
             maxvals=np.max(self.raspos2[i][:,1])
             if maxvals>=1e-1 or maxvals<=-1e-1:
                 pass
@@ -266,7 +265,30 @@ class adata(parameters):
         results.ravp=self.ravp
         return results
         
-    
+    def plotspecific(self,data,nopts,polgrade):
+        ldata = len(data)
+        lmax=lmin=0
+        rdata = [data[i].shape[0] for i in range(ldata)]
+        lmax  =  max(rdata)
+        lmin  = min(rdata)
+           
+        ndata=np.zeros((lmax,4,ldata))
+        for i in range(ldata):
+            for j in range(4):
+                ldata=len(data[i])
+                ndata[:ldata,j,i]=data[i][:,j]
+
+        average = np.zeros((lmax,4))
+        av=0
+        for i in range(data.shape[1]):
+            average[:lmin,i]=ndata[:lmin,i,:].mean(axis=1)
+        back = rbackline(average[:lmin],nopts,polgrade)
+        dout=back.dataout
+        doutline=back.backline
+        #plt.plot(average[:lmin,0],average[:lmin,1])
+        plt.plot(dout[:,0],dout[:,1],'-ob',mfc='none')
+        plt.xlim([1.5,1.57])
+        #plt.plot(dout[:,0],doutline)
     
 
         
