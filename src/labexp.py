@@ -10,8 +10,8 @@ from os import walk
 from IPython.display import display, clear_output
 
 class experiments:
-    def __init__(self, lab, sys, exptype, sample):
-        self.path='/media/labfiles/lab-exps'
+    def __init__(self,path,lab,exptype,sample,printtable=True):
+        self.path= path
         self.headers=['No. Dir','Name Dir', 'No. files']
         self.count=0
         self.foldername=[]
@@ -28,14 +28,21 @@ class experiments:
         self.exptype=exptype
         self.rasp1table=[]
         self.rasp2table=[]
+        self.printtable=printtable
+        self.dirnames=[]
+        self.folder_samples=[]
+        # self.path=self.path+'/spectro-lab' if lab==1 else self.path+'/ellipsometry-lab'
+        # if lab==2:
+        #     self.path=self.path+'/nano' if sys=='nano' else self.path+'/cry-sys-2' if sys=='cry2' else self.path+'/cry-sys-1' if sys=='cry1' else self.path
+        self.path = self.path+'/'+lab
+        for folders in glob.glob(self.path+'/*'):
+             self.folder_samples.append(folders)
 
-        self.path=self.path+'/spectro-lab' if lab==1 else self.path+'/ellipsometry-lab'
-        if lab==2:
-            self.path=self.path+'/nano' if sys=='nano' else self.path+'/cry-sys-2' if sys=='cry2' else self.path+'/cry-sys-1' if sys=='cry1' else self.path
-    
         for (dirpath, dirnames, filenames) in walk(self.path):
             if sample in dirpath:
                 self.foldername.append(dirpath)
+                self.dirnames.append(dirnames)
+
 
         self.foldername = sorted(self.foldername)
         for dirpath in self.foldername:
@@ -45,9 +52,10 @@ class experiments:
                 self.namef=[]
                 self.npos1=[]
                 self.npos2=[]
+
                 for name in sorted(glob.glob(dirpath+'/*.xls')):
                     singlename=name.split('/')[-1]
-                    if exptype in singlename or "RD" in singlename or "rds" in singlename:
+                    if self.exptype in singlename or "RD" in singlename or "rds" in singlename:
                         dat=pd.read_excel(name).values
                         self.datac.append(dat[::-1])
                         self.namef.append(name)
@@ -61,17 +69,22 @@ class experiments:
                             self.npos2.append(name)
                     else:
                         pass
+
                 for name in sorted(glob.glob(dirpath+'/*.h5')):
-                    if exptype in name:
-                        dat=h5.File(name,'r')
-                        dset=list(dat.keys())
-                        self.datac.append(dat[dset[0]][:,:])
+                    if self.exptype in name:
+                        self.dat=h5.File(name,'r')
+                        self.dset=list(self.dat.keys())
                         self.namef.append(name)
+                        if self.dset:
+                            self.datac.append(self.dat[self.dset[0][:]])
+                       
+                        
                 for name in sorted(glob.glob(dirpath+'/*.dat')):
-                    if exptype in name:
+                    if self.exptype in name:
                         dat=np.loadtxt(name)
                         self.datac.append(dat[:,:])
                         self.namef.append(name)
+
 
 
                 self.data.append(self.datac)
@@ -86,13 +99,14 @@ class experiments:
                 self.ptable.append([self.count,dirpath.split(self.path+'/')[1],len(self.datac)])
                 self.count+=1
                 
-        if self.datac:
+        if (self.datac and self.printtable==True):
             print(tabulate(self.ptable,self.headers,tablefmt="github",colalign=("center","left","center")))
-        else:
-            print("no experiments found, change search parameters")
+        
+
+        self.dframe = pd.DataFrame(self.ptable,columns=self.headers)
   
-    def darray(self):
-        alldata=self.data
+    # def darray(self):
+    #     alldata=self.data
         
         # maxrowspos1 = max(i.shape[0] for i in self.raspos1)
         # maxcolspos1 = max(i.shape[1] for i in self.raspos1)
@@ -114,3 +128,5 @@ class experiments:
         #         for j in range(self.raspos2[k].shape[0]):
         #             self.araspos2[j,i,k]=self.raspos2[k][j][i]
 
+    def check_h5(self):
+        return self.datac 
