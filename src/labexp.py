@@ -52,7 +52,6 @@ class experiments:
                 self.namef=[]
                 self.npos1=[]
                 self.npos2=[]
-
                 for name in sorted(glob.glob(dirpath+'/*.xls')):
                     singlename=name.split('/')[-1]
                     if self.exptype in singlename or "RD" in singlename or "rds" in singlename:
@@ -77,15 +76,11 @@ class experiments:
                         self.namef.append(name)
                         if self.dset:
                             self.datac.append(self.dat[self.dset[0][:]])
-                       
-                        
                 for name in sorted(glob.glob(dirpath+'/*.dat')):
                     if self.exptype in name:
                         dat=np.loadtxt(name)
                         self.datac.append(dat[:,:])
                         self.namef.append(name)
-
-
 
                 self.data.append(self.datac)
                 self.filesname.append(self.namef)
